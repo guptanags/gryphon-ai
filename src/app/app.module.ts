@@ -12,6 +12,7 @@ import { CodeQualityGuardianComponent } from './code-quality-guardian/code-quali
 import { RouterModule, Routes } from '@angular/router';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { FormsModule } from '@angular/forms'; // For ngModel
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
@@ -36,7 +37,12 @@ const routes: Routes = [
     CodeQualityGuardianComponent,
     SidebarComponent
   ],
-  imports: [BrowserModule, RouterModule.forRoot(routes), FormsModule],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes),
+    FormsModule,
+    HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

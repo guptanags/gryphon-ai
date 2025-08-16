@@ -1,12 +1,13 @@
 // src/app/data.service.ts
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
-import { delay } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+  constructor(private http: HttpClient) {}
   // Existing methods from previous dashboards
   getCodeToDocsData() {
     return {
@@ -165,18 +166,12 @@ export class DataService {
     };
   }
 
+  
+
   generateDocumentation(urls: string[], types: string[]): Observable<{ type: string, url: string }[]> {
-    // Simulate server processing and response
-    const docs: { type: string, url: string }[] = [];
-    urls.forEach((url, i) => {
-      types.forEach(type => {
-        docs.push({
-          type,
-          url: `${url}/generated-${type}-doc-${i + 1}`
-        });
-      });
-    });
-    // Simulate network delay
-    return of(docs).pipe(delay(1000));
+    return this.http.post<{ type: string, url: string }[]>(
+      'http://localhost:3001/api/generateDocumentation',
+      { urls, types }
+    );
   }
 }
