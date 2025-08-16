@@ -1,27 +1,84 @@
-# Codeforge
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.0.0.
+# Gryphon AI
 
-## Development server
+## Overview
+Gryphon AI is a modular developer productivity platform built with Angular 15. It provides:
+- **Dashboard**: Centralized view of all modules and project status.
+- **Insight Engine**: Ingests repositories, allows users to select documentation types, and generates documentation for codebases.
+- **Quality Guardian**: Accepts a repository, lets users generate and execute various test cases (unit, acceptance, automation, load), and displays results.
+- **Autonomous Co-pilot**: Accepts feature requests, performs impact analysis, generates code, and automates pull requests.
+- **Interactive Knowledge Base**: Provides a searchable, interactive knowledge base for your code and documentation.
+- **Intelli Review**: Automated code review and quality checks.
+- **Settings**: Manage user and app preferences.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Functional Specs
+- Unified sidebar navigation for all modules.
+- Each module is a self-contained Angular component.
+- Insight Engine supports multi-URL input and documentation type selection.
+- Quality Guardian supports repository input, test type selection, and displays test results and suite details.
+- Autonomous Co-pilot supports feature request input, workflow steps, and PR automation.
+- All modules share a consistent color theme and logo branding.
 
-## Code scaffolding
+## Technical Documentation
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### Prerequisites
+- **Node.js**: v16.x or v18.x recommended
+- **npm**: v8.x or later
+- **Angular CLI**: v15.x
 
-## Build
+### Setup Instructions
+1. **Clone the repository:**
+	```sh
+	git clone <your-repo-url>
+	cd codeforge
+	```
+2. **Install Node.js and npm:**
+	- Download from [nodejs.org](https://nodejs.org/)
+	- Verify installation:
+	  ```sh
+	  node -v
+	  npm -v
+	  ```
+3. **Install Angular CLI 15:**
+	```sh
+	npm install -g @angular/cli@15
+	```
+	- Verify:
+	  ```sh
+	  ng version
+	  ```
+4. **Install dependencies:**
+	```sh
+	npm install
+	```
+5. **Run the development server:**
+	```sh
+	ng serve
+	```
+	- Open [http://localhost:4200](http://localhost:4200) in your browser.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+### Build
+```sh
+ng build
+```
+Build artifacts are stored in the `dist/` directory.
 
-## Running unit tests
+### Testing
+- **Unit tests:**
+  ```sh
+  ng test
+  ```
+- **End-to-end tests:**
+  ```sh
+  ng e2e
+  ```
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### Code Generation & Scaffolding
+Generate a new component:
+```sh
+ng generate component component-name
+```
+Other schematics: `ng generate directive|pipe|service|class|guard|interface|enum|module`
 
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+### Further Help
+For more help on Angular CLI, use `ng help` or see the [Angular CLI Documentation](https://angular.io/cli).
