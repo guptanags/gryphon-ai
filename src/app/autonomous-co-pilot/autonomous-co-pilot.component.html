@@ -1,0 +1,49 @@
+<!-- src/app/autonomous-co-pilot/autonomous-co-pilot.component.html -->
+<div class="autonomous-co-pilot-container">
+  <header>
+    <div class="logo">
+      <img src="assets/gryphon-ai-logo.jpg" alt="Gryphen AI Logo" style="height:75px; vertical-align:middle;" />
+    </div>
+    <div class="user-info">
+      <span class="notification">!</span>
+      <span class="phase">Phase 4</span>
+    </div>
+  </header>
+
+  <div class="main-content">
+   <app-sidebar></app-sidebar>
+
+    <main class="content-area">
+      <h1>Autonomous Co-pilot<br><span class="subtitle">(Code Generation & PR Automation)</span></h1>
+      <div class="feature-request">
+        <input type="text" placeholder="Describe your feature request in natural language..." [(ngModel)]="autonomousCoPilotData.featureRequest" />
+      </div>
+
+      <div class="workflow-steps">
+        <button [ngClass]="{'active': autonomousCoPilotData.activeStep === 'Impact Analysis'}"
+                (click)="setActiveStep('Impact Analysis')">1. Impact Analysis</button>
+        <button [ngClass]="{'active': autonomousCoPilotData.activeStep === 'Code Generation'}"
+                (click)="setActiveStep('Code Generation')">2. Code Generation</button>
+        <button [ngClass]="{'active': autonomousCoPilotData.activeStep === 'Automated Workflow'}"
+                (click)="setActiveStep('Automated Workflow')">3. Automated Workflow</button>
+      </div>
+
+      <div class="workflow-content" *ngIf="autonomousCoPilotData.activeStep === 'Automated Workflow'">
+        <div class="diff-section">
+          <pre>{{ getDiffText() }}</pre>
+        </div>
+        <div class="pull-request">
+          <h3>Pull request</h3>
+          <div class="pr-details">
+            <label>Title</label>
+            <input type="text" [(ngModel)]="autonomousCoPilotData.pullRequest.title" readonly />
+            <label>Reviewers</label>
+            <input type="text" [(ngModel)]="autonomousCoPilotData.pullRequest.reviewers" />
+            <label>Issues</label>
+            <textarea [(ngModel)]="autonomousCoPilotData.pullRequest.issues" readonly></textarea>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

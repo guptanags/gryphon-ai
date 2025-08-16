@@ -1,0 +1,85 @@
+<!-- src/app/dashboard/dashboard.component.html -->
+<div class="dashboard-container">
+  <header>
+    <div class="logo">
+      <img src="assets/gryphon-ai-logo.jpg" alt="Gryphen AI Logo" style="height:75px; vertical-align:middle;" />
+    </div>
+    <div class="user-info">
+      <span class="notification">!</span>
+      <span class="user">User</span>
+    </div>
+  </header>
+
+  <div class="main-content">
+  <app-sidebar></app-sidebar>
+    <main class="content-area">
+      
+      <!-- Dashboard content goes here -->
+      <h1>Dashboard</h1>
+      <div class="grid-container">
+        <!-- Code-to-Docs -->
+        <div class="card code-to-docs">
+          <h3>Code-to-Docs</h3>
+          <div class="code-snippets">
+            <pre *ngFor="let snippet of codeToDocsData.codeSnippets">{{ snippet }}</pre>
+          </div>
+        </div>
+
+        <!-- Quality Guardian -->
+        <div class="card quality-guardian">
+          <h3>Quality Guardian</h3>
+          <div class="progress-container">
+          <div class="progress-circle">
+            <svg viewBox="0 0 36 36" class="circular-chart">
+              <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+              <path class="circle" [attr.stroke-dasharray]="qualityGuardianData.passPercentage + ', 100'" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            </svg>
+            <div class="percentage">{{ qualityGuardianData.passPercentage }}% Passed</div>
+          </div>
+          <div class="metrics">
+            <p>10% Sapped</p>
+            <p>85% Passed</p>
+            <p>10% Failed</p>
+            <p>5% Skipped</p>
+          </div>
+        </div>
+        <div class="recent-runs">
+          <h3>Recent Runs</h3>
+          <ul>
+            <li *ngFor="let run of qualityGuardianData.recentRuns">
+              {{ run.name }} <span>{{ run.count }}</span>
+            </li>
+          </ul>
+        </div>
+        </div>
+
+        <!-- Interactive Knowledge Base -->
+        <div class="card interactive-knowledge-base">
+          <h3>Interactive Knowledge Base</h3>
+          <div class="chat-bubble">
+          <div class="user-avatar"></div>
+          <div class="message">
+              <p>{{ knowledgeBaseData.ragQa.question }}</p>
+              <p><a href="{{ knowledgeBaseData.ragQa.response }}">{{knowledgeBaseData.ragQa.response }}</a></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Autonomous Co-pilot -->
+        <div class="card autonomous-co-pilot">
+          <h3>Autonomous Co-pilot</h3>
+          <div class="features">
+            <div *ngFor="let feature of autonomousCoPilotData.features" class="feature-item">
+              <label>
+                <input type="checkbox" [checked]="feature.enabled" disabled>
+                {{ feature.name }}
+              </label>
+              <span *ngIf="feature.enabled" class="status-dot green"></span>
+              <span *ngIf="!feature.enabled" class="status-dot gray"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>

@@ -1,0 +1,92 @@
+<!-- src/app/quality-guardian/quality-guardian.component.html -->
+<div class="quality-guardian-container">
+  <header>
+    <div class="logo">
+      <img src="assets/gryphon-ai-logo.jpg" alt="Gryphen AI Logo" style="height:75px; vertical-align:middle;" />
+    </div>
+    <div class="user-info">
+      <span class="notification">!</span>
+      <span class="title">(Automated Testing)</span>
+      <span class="user">User</span>
+    </div>
+  </header>
+
+  <div class="main-content">
+  <app-sidebar></app-sidebar>
+
+    <main class="content-area">
+      <h1>Quality Guardian</h1>
+      
+
+      <div class="quality-guardian-panel">
+        <label for="repoUrl">Repository URL:</label>
+        <input id="repoUrl" type="text" [(ngModel)]="repoUrl" placeholder="Enter repository URL" />
+
+        <div class="test-types">
+          <label *ngFor="let type of testTypes" class="test-type-option">
+            <input type="checkbox" [(ngModel)]="type.selected" />
+            {{ type.name }}
+          </label>
+        </div>
+
+        <button class="generate-btn" (click)="generateAndExecute()" [disabled]="loading">
+          {{ loading ? 'Processing...' : 'Generate & Execute' }}
+        </button>
+      </div>
+
+      <!-- Existing content panel -->
+      <div *ngIf="generated">
+         <div class="generated-test">
+          <h3>Generated Test</h3>
+          <pre>{{ qualityGuardianData.generatedTest }}</pre>
+      </div>
+          <section class="test-results">
+        <h2>Test Results</h2>
+        <div class="pass-rate">
+          <span class="percentage">{{ qualityGuardianData.passRate }}%</span>
+          <span class="label">Pass Rate</span>
+          <div class="status-counts">
+            <span class="status passed">{{ qualityGuardianData.passed }} Passed</span>
+            <span class="status failed">{{ qualityGuardianData.failed }} Failed</span>
+            <span class="status skipped">{{ qualityGuardianData.skipped }} Skipped</span>
+          </div>
+        </div>
+      </section>
+
+      <div class="details-container">
+        <div class="recent-runs">
+          <h3>Recent Test Runs</h3>
+          <ul>
+            <li *ngFor="let run of qualityGuardianData.recentRuns">
+              <span>Run on {{ run.date }}: {{ run.status }}</span>
+              <span class="count">{{ run.count }}</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="test-suite">
+          <h3>Test Suite Details</h3>
+          <div class="suite-item" *ngFor="let suite of qualityGuardianData.testSuiteDetails">
+            <div class="suite-name">{{ suite.name }}</div>
+            <ul>
+              <li *ngFor="let test of suite.tests">
+                <span [ngClass]="{'passed': test.status === 'Passed', 'failed': test.status === 'Failed'}">
+                  {{ test.name }}
+                </span>
+                <span class="status-dot" [ngClass]="{'passed': test.status === 'Passed', 'failed': test.status === 'Failed'}"></span>
+                <span>{{ test.status }}</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+        <!-- Place your existing UI here, or conditionally show the generated results -->
+        <ng-content>
+         
+
+      
+        </ng-content>
+      </div>
+    </main>
+  </div>
+</div>

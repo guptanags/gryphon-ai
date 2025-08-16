@@ -1,0 +1,70 @@
+<!-- src/app/code-quality-guardian/code-quality-guardian.component.html -->
+<div class="code-quality-guardian-container">
+  <header>
+    <div class="logo">
+      <img src="assets/gryphon-ai-logo.jpg" alt="Gryphen AI Logo" style="height:75px; vertical-align:middle;" />
+    </div>
+    <div class="user-info">
+      <span class="notification">!</span>
+      <span class="user">{{ settingsData.user.name }}</span>
+    </div>
+  </header>
+
+  <div class="main-content">
+    <app-sidebar></app-sidebar>
+
+    <main class="content-area">
+      <h1>Intelli Review</h1>
+      <div class="metrics-panel">
+        <div class="metric-card">
+          <h3>Code Coverage</h3>
+          <span class="value">{{ codeQualityGuardianData.metrics.codeCoverage }}%</span>
+        </div>
+        <div class="metric-card">
+          <h3>Complexity Score</h3>
+          <span class="value">{{ codeQualityGuardianData.metrics.complexityScore }}</span>
+        </div>
+        <div class="metric-card">
+          <h3>Linting Errors</h3>
+          <span class="value">{{ codeQualityGuardianData.metrics.lintingErrors }}</span>
+        </div>
+        <div class="metric-card">
+          <h3>Total Files</h3>
+          <span class="value">{{ codeQualityGuardianData.metrics.totalFiles }}</span>
+        </div>
+      </div>
+
+      <div class="insights-section">
+        <h2>Insights</h2>
+        <ul class="insights-list">
+          <li *ngFor="let insight of codeQualityGuardianData.insights" [ngClass]="getSeverityClass(insight.severity)">
+            <span class="icon">{{ getSeverityIcon(insight.severity) }}</span>
+            <span class="message">{{ insight.message }}</span>
+          </li>
+        </ul>
+      </div>
+
+      <div class="recent-scans">
+        <h2>Recent Scans</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Status</th>
+              <th>Duration</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let scan of codeQualityGuardianData.recentScans">
+              <td>{{ scan.date }}</td>
+              <td [ngClass]="{'success': scan.status === 'Completed', 'error': scan.status === 'Failed'}">
+                {{ scan.status }}
+              </td>
+              <td>{{ scan.duration }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+</div>

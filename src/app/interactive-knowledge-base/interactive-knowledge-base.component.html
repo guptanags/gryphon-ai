@@ -1,0 +1,39 @@
+<!-- src/app/interactive-knowledge-base/interactive-knowledge-base.component.html -->
+<div class="interactive-knowledge-base-container">
+  <header>
+    <div class="logo">
+      <img src="assets/gryphon-ai-logo.jpg" alt="Gryphen AI Logo" style="height:75px; vertical-align:middle;" />
+    </div>
+    <div class="user-info">
+      <span class="notification">!</span>
+      <span class="user">User</span>
+    </div>
+  </header>
+
+  <div class="main-content">
+  <app-sidebar></app-sidebar>
+
+    <main class="content-area">
+      <h1>RAG Q&A</h1>
+      <section class="qa-section">
+        <p class="question">{{ interactiveKnowledgeBaseData.question }}</p>
+        <div class="ai-response">
+          <h3>{{ interactiveKnowledgeBaseData.aiResponse.text }}</h3>
+          <div class="code-snippets" *ngFor="let snippet of interactiveKnowledgeBaseData.aiResponse.codeSnippets">
+            <pre>{{ snippet.code }}</pre>
+            <div class="snippet-options">
+              <button *ngFor="let option of snippet.options" (click)="handleOption(option, snippet.code)">
+                {{ option }}
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div class="input-section">
+        <input type="text" placeholder="Ask a question about the codebase..." [(ngModel)]="userQuestion" />
+        <button (click)="sendQuestion()" class="send-btn">Send</button>
+      </div>
+    </main>
+  </div>
+</div>
