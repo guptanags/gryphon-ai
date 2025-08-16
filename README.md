@@ -30,7 +30,7 @@ Gryphon AI is a modular developer productivity platform built with Angular 15. I
 1. **Clone the repository:**
 	```sh
 	git clone <your-repo-url>
-	cd codeforge
+	cd gryphon-ai
 	```
 2. **Install Node.js and npm:**
 	- Download from [nodejs.org](https://nodejs.org/)
